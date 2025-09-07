@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS visualizaciones(
 	id_visualizacion INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
     id_pelicula INT NOT NULL,
-    fecha_vista DATE NOT NULL,
+    fecha_vista DATE NOT NULL DEFAULT (curdate()),
     calificacion TINYINT,
     comentario TEXT,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
