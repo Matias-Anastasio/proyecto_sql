@@ -27,8 +27,23 @@ DELIMITER ;
 -- Funcion para contar cuantas peliculas vio un usuario
 DELIMITER $$
 CREATE FUNCTION total_visualizaciones_usuario(f_id_usuario INT)
-RETURNS TINYINT UNSIGNED
+RETURNS INT UNSIGNED
 DETERMINISTIC
 BEGIN
-	DECLARE vistas TINYINT UNSIGNED;
-    SELECT count()
+	DECLARE vistas INT UNSIGNED;
+    SELECT count(*) INTO vistas FROM visualizaciones WHERE id_usuario=f_id_usuario;
+    RETURN vistas;
+END$$
+DELIMITER ;
+
+-- Funcion para calcular la cantidad de veces que un actor aparece en una pelicula
+DELIMITER $$
+CREATE FUNCTION cantidad_peliculas_actor(f_id_actor INT)
+RETURNS INT UNSIGNED
+DETERMINISTIC
+BEGIN
+	DECLARE aparicion_actor INT UNSIGNED;
+    SELECT count(*) INTO aparicion_actor FROM peliculas_actores WHERE id_actor=f_id_actor;
+    RETURN aparicion_actor;
+END$$
+DELIMITER ;
