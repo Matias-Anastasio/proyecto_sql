@@ -47,3 +47,27 @@ BEGIN
     RETURN aparicion_actor;
 END$$
 DELIMITER ;
+
+-- Funcion para devolver la categoria de una pelicula
+DELIMITER $$
+CREATE FUNCTION categoria_pelicula(f_id_pelicula INT)
+RETURNS VARCHAR(40)
+DETERMINISTIC
+BEGIN
+	DECLARE cat VARCHAR(40);
+    SELECT c.nombre INTO cat FROM peliculas p INNER JOIN categorias c USING (id_categoria) WHERE p.id_pelicula = f_id_pelicula;
+    RETURN cat;
+END$$
+DELIMITER ;
+
+-- Funcion para saber el ultimo dia que un usuario vio algo
+DELIMITER $$
+CREATE FUNCTION fecha_ultima_vista(f_id_usuario INT)
+RETURNS DATE
+DETERMINISTIC
+BEGIN
+	DECLARE ultima_vista DATE;
+	SELECT max(fecha_vista) INTO ultima_vista FROM visualizaciones WHERE id_usuario = f_id_usuario;
+    RETURN ultima_vista;
+END$$
+DELIMITER ;
