@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) NOT NULL UNIQUE,
     nombre VARCHAR(100) NOT NULL,
-    fecha_reg DATE NOT NULL
+    fecha_reg DATE NOT NULL DEFAULT (curdate())
 );
 
 CREATE TABLE IF NOT EXISTS visualizaciones(
